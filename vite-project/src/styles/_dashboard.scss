@@ -1,0 +1,95 @@
+@import "mixins";
+.dashboard{
+    overflow-y: auto;
+    background-color: aliceblue;
+    
+}
+.fuel {
+    position: relative;
+    width: 7rem;
+    height: 7rem;
+    background-color: #efeeeb;
+    border-radius: 50%;
+    margin: auto;
+    background: conic-gradient(red 23%, rgb(238, 235, 235) 0%);
+}
+
+.fuel::before {
+    content: "";
+    position: absolute;
+    top: 22px;
+    left: 22px;
+    width: 4rem;
+    height: 4rem;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.fuel span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: orangered;
+    font-weight:  bolder;
+}
+
+.load {
+    position: relative;
+    width: 7rem;
+    height: 7rem;
+    background-color: #efeeeb;
+    border-radius: 50%;
+    margin: auto;
+    background: conic-gradient(rgb(0, 89, 255) 23%, rgb(238, 235, 235) 0%);
+}
+
+.load::before {
+    content: "";
+    position: absolute;
+    top: 22px;
+    left: 22px;
+    width: 4rem;
+    height: 4rem;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.load span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgb(0, 89, 255);
+    font-weight:  bolder;
+}
+
+.torque {
+    position: relative;
+    width: 7rem;
+    height: 7rem;
+    background-color: #efeeeb;
+    border-radius: 50%;
+    margin: auto;
+    background: conic-gradient(rgb(0, 89, 255) 23%, rgb(238, 235, 235) 0%);
+}
+
+.torque::before {
+    content: "";
+    position: absolute;
+    top: 22px;
+    left: 22px;
+    width: 4rem;
+    height: 4rem;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.torque span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgb(0, 89, 255);
+    font-weight:  bolder;
+}

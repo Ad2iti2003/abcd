@@ -4,7 +4,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import { AiOutlineMenu } from 'react-icons/ai';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-import {List} from '@mui/material/List';
+import {List} from '@mui/material';
 import { Button } from '@mui/material';
 import {Link} from 'react-router-dom';
 
@@ -35,15 +35,16 @@ export default function AdminSide() {
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
-      <List className='items-center list-item'>
-        <Button><Link className='block'>Device</Link></Button>
-        <Button><Link className='block'>Message</Link></Button>
-        <Button><Link className='block'>Signal</Link></Button>
-        <Button><Link className='block'>aggregation</Link></Button>
-        <Button><Link className='block'>Map</Link></Button>
-        <Button><Link className='block'>graph</Link></Button>
-        
-      </List>
+    <ul className='px-20 mt-20 text-center'>
+      <li className='px-5 text-center w-full bg-gray-300 rounded-xl hover:bg-gray-600 cursor-pointer'><Button><Link className='block'>Device</Link></Button></li>
+      <li> <Button><Link className='block'>Message</Link></Button></li>
+      <li><Button><Link className='block'>Signal</Link></Button></li>
+      <li><Button><Link className='block'>aggregation</Link></Button></li>
+      <li><Button><Link className='block'>Map</Link></Button></li>
+      <li><Button><Link className='block'>graph</Link></Button></li>
+
+    </ul>
+
     </Box>
   );
 

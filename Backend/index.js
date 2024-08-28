@@ -1,5 +1,5 @@
 const express = require('express');
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
@@ -31,7 +31,7 @@ app.get('/api/devices', (req, res) => {
 });
 
 app.get('/api/messages', (req, res) => {
-  db.query('SELECT * FROM Message', (err, results) => {
+  db.query('SELECT * FROM Messages', (err, results) => {
     if (err) {
       console.error('Error fetching messages:', err);
       return res.status(500).json({ error: 'Internal Server Error' });
@@ -60,21 +60,19 @@ app.get('/api/aggregations', (req, res) => {
   });
 });
 
-// Endpoint to post data
-app.post('/api/chart-data', (req, res) => {
-  const { label, value } = req.body;
-  if (!label || !value) {
-    return res.status(400).json({ error: 'Label and value are required' });
-  }
-
-  db.query('INSERT INTO ChartData (label, value) VALUES (?, ?)', [label, value], (err, results) => {
+app.get('/api/chart-data', (req, res) => {
+  db.query('SELECT * FROM CHARTDATA', (err, results) => {
     if (err) {
-      console.error('Error inserting data:', err);
+      console.error('Error fetching aggregations:', err);
       return res.status(500).json({ error: 'Internal Server Error' });
     }
-    res.status(201).json({ message: 'Data inserted successfully', id: results.insertId });
+    res.json({ chartdata: results });
   });
 });
+
+
+
+
 
 const PORT = 5000;
 app.listen(PORT, () => {

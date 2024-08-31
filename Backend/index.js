@@ -19,7 +19,9 @@ db.connect((err) => {
   console.log('Connected to MySQL');
 });
 
-// Endpoint to fetch data from each table
+// Endpoint to fetch chart data
+
+
 app.get('/api/devices', (req, res) => {
   db.query('SELECT * FROM Devices', (err, results) => {
     if (err) {
@@ -68,11 +70,62 @@ app.get('/api/chart-data', (req, res) => {
     }
     res.json({ chartdata: results });
   });
+}); 
+
+app.get('/api/chartdata', (req, res) => {
+  // Example query to get chart data; modify as needed
+  db.query('SELECT * FROM CHARTDATA', (err, results) => {
+    if (err) {
+      console.error('Error fetching chart data:', err);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+    
+    // Mock data for demonstration; replace with your actual query results
+    const chartData = {
+      speed: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+        datasets: [{
+          label: 'Speed (km/h)',
+          data: [10, 20, 15, 25, 30],
+          borderColor: 'rgba(75, 192, 192, 1)',
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          fill: true,
+        }],
+      },
+      attitude: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+        datasets: [
+          {
+            label: 'Roll (deg)',
+            data: [5, 10, 8, 12, 14],
+            borderColor: 'rgba(75, 192, 192, 1)',
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            fill: true,
+          },
+          {
+            label: 'Pitch (deg)',
+            data: [3, 7, 5, 9, 11],
+            borderColor: 'rgba(255, 99, 132, 1)',
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            fill: true,
+          },
+        ],
+      },
+      acceleration: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+        datasets: [{
+          label: 'Acceleration (m/s^2)',
+          data: [2, 4, 3, 5, 6],
+          borderColor: 'rgba(255, 159, 64, 1)',
+          backgroundColor: 'rgba(255, 159, 64, 0.2)',
+          fill: true,
+        }],
+      },
+    };
+
+    res.json(chartData);
+  });
 });
-
-
-
-
 
 const PORT = 5000;
 app.listen(PORT, () => {

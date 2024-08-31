@@ -12,8 +12,8 @@ export default function AdminSide() {
 
   useEffect(() => {
     fetch('http://localhost:5000/api/devices')
-      .then(response => response.json())
-      .then(data => setDevices(data.devices));
+    .then(response => response.json())
+    .then(data => setDevices(data.devices || []));
 
     fetch('http://localhost:5000/api/signals')
       .then(response => response.json())
@@ -69,7 +69,7 @@ export default function AdminSide() {
              id="signal-autocomplete"
              className="bg-white"
              options={signals}
-             getOptionLabel={(option) => option.signal_value || ''}
+             getOptionLabel={(option) => option.signal_type || ''}
              sx={{ width: 150 }}
              renderInput={(params) => <TextField {...params} label="Signal" />}
             />

@@ -56,50 +56,10 @@ function Dashboard() {
 
   useEffect(() => {
     // Fetch chart data
-    fetch('http://localhost:5000/api/chart-data')
+    fetch('http://localhost:5000/api/chartdata')
       .then(response => response.json())
       .then(data => {
-        setChartData({
-          speed: {
-            labels: data.speed.labels,
-            datasets: [{
-              label: 'Speed (km/h)',
-              data: data.speed.data,
-              borderColor: 'rgba(75, 192, 192, 1)',
-              backgroundColor: 'rgba(75, 192, 192, 0.2)',
-              fill: true,
-            }],
-          },
-          attitude: {
-            labels: data.attitude.labels,
-            datasets: [
-              {
-                label: 'Roll (deg)',
-                data: data.attitude.roll,
-                borderColor: 'rgba(75, 192, 192, 1)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                fill: true,
-              },
-              {
-                label: 'Pitch (deg)',
-                data: data.attitude.pitch,
-                borderColor: 'rgba(255, 99, 132, 1)',
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                fill: true,
-              },
-            ],
-          },
-          acceleration: {
-            labels: data.acceleration.labels,
-            datasets: [{
-              label: 'Acceleration (m/s^2)',
-              data: data.acceleration.data,
-              borderColor: 'rgba(255, 159, 64, 1)',
-              backgroundColor: 'rgba(255, 159, 64, 0.2)',
-              fill: true,
-            }],
-          },
-        });
+        setChartData(data);
       })
       .catch(error => console.error('Error fetching chart data:', error));
   }, []);
@@ -135,18 +95,23 @@ function Dashboard() {
           <div className="w-48 h-40 bg-white">
             <div className="py-1 pl-2">Speed</div>
             <div className="bg-lime-600 justify-center flex py-11 text-white text-4xl">
-              29km/h
+              {chartData.speed.datasets[0]?.data[chartData.speed.datasets[0]?.data.length - 1] || 'N/A'} km/h
             </div>
           </div>
           <div className="w-40 h-40 bg-white">
             <div className="py-1 pl-2">Distance</div>
             <div className="bg-blue-500 text-center text-3xl py-11 text-white">
-              8.66km
+              {/* Add dynamic distance data */}
+              {chartData.speed.datasets[0]?.data.reduce((acc, val) => acc + val, 0) || 'N/A'} km
             </div>
           </div>
           <div className="w-40 h-40 bg-white">
             <div className="py-1 pl-2">RPM</div>
-            <div className="bg-blue-500 text-center text-3xl py-11 text-white">1530</div>
+            <div className="bg-blue-500 text-center text-3xl py-11 text-white">
+              {/* Add dynamic RPM data */}
+              {/* Placeholder */}
+              1530
+            </div>
           </div>
           <div className="w-36 h-40 bg-white">
             <div className="py-1 pl-2">Fuel (%)</div>
@@ -177,18 +142,24 @@ function Dashboard() {
           <div className="w-48 h-40 bg-white text-center">
             <div className="py-1 pl-2">Altitude (AVG)</div>
             <div className="bg-blue-500 justify-center flex py-11 text-white text-4xl">
+              {/* Add dynamic altitude data */}
+              {/* Placeholder */}
               64 m
             </div>
           </div>
           <div className="w-40 h-40 bg-white text-center">
             <div className="py-1 pl-2">Satellites</div>
             <div className="bg-lime-600 justify-center flex py-10 text-white text-5xl">
+              {/* Add dynamic satellites data */}
+              {/* Placeholder */}
               12
             </div>
           </div>
           <div className="w-40 h-40 bg-white text-center">
             <div className="py-1 pl-2">Fix</div>
             <div className="bg-lime-600 justify-center flex py-10 text-white text-5xl">
+              {/* Add dynamic fix data */}
+              {/* Placeholder */}
               3.9
             </div>
           </div>
@@ -247,3 +218,4 @@ function Dashboard() {
 }
 
 export default Dashboard;
+
